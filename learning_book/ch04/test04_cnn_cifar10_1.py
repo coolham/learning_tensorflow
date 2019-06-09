@@ -12,7 +12,7 @@ from learning_book.ch04.test04_common import *
 
 
 '''
-http://www.cs.tornoto.edu/~kriz/cifar-10-python.tar.gz
+http://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz
 '''
 
 CUR_PATH = os.getcwd()

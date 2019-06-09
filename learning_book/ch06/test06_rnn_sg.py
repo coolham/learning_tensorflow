@@ -41,3 +41,21 @@ vocabulary_size = len(index2word_map)
 # Generate skip-gram pairs
 skip_gram_pairs = []
 for sent in sentences:
+    tokenized_sent = sent.lower().split()
+    for i in range(1, len(tokenized_sent)-1):
+        word_context_pair = [[word2index_map[tokenized_sent[i-1]],
+                              word2index_map[tokenized_sent[i+1]]],
+                             word2index_map[tokenized_sent[i]]
+                             ]
+        skip_gram_pairs.append([word_context_pair[1], word_context_pair[0][0]])
+        skip_gram_pairs.append([word_context_pair[1], word_context_pair[0][1]])
+
+def get_skipgram_batch(batch_size):
+    instance_indeces = list(range(len(skip_gram_pairs)))
+    np.random.shuffle(instance_indeces)
+    batch = instance_indeces[:batch_size]
+    x = [skip_gram_pairs[i][0] for i in batch]
+    y = [skip_gram_pairs[i][1] for i in batch]
+    return x, y
+
+print(skip_gram_pairs[0:10])
